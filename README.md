@@ -12,7 +12,9 @@ Data for the sentiment analysis is gathered using Twitter's Tweepy, which is use
   <body>
     <p>Positive WordCloud</p>
     <img src="Good.png">
+    <p>Negative WordCloud</p>
     <img src="Bad.png">
+    <p>Neutral WordCloud</p>
     <img src="Neutral.png">
   </body>
 </html>
