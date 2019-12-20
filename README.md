@@ -11,5 +11,7 @@ Data for the sentiment analysis is gathered using Twitter's Tweepy, which is use
 <html>
   <body>
     <img src="Good.png">
+    <img src="Bad.png">
+    <img src="Neutral.png">
   </body>
 </html>
