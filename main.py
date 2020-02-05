@@ -14,16 +14,14 @@ from twitter_auth import *
 
 # Twitter authentication
 def twitter_auth():
-    # This function has been completed for you
-    # It uses hardcoded Twitter credentials and returns a request handler
+    # Uses hardcoded Twitter credentials and returns a request handler
     auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
     auth.set_access_token(ACCESS_TOKEN, ACCESS_SECRET)
     return tweepy.API(auth)
 
 # Retrieve Tweets
 def get_tweets():
-    # This function has been completed for you
-    # It creates a Tweet list and extracts Tweets
+    # Creates a Tweet list and extracts Tweets
     account = '@BarackObama' # You can change this to any Twitter account you wish
     extractor = twitter_auth() # Twitter handler object
     tweets = []
@@ -34,13 +32,12 @@ def get_tweets():
 
 # Create dataframe
 def make_dataframe(tweets):
-    # This function should return a dataframe containing the text in the Tweets
+    # This function returns a dataframe containing the text in the Tweets
     return pandas.DataFrame(data = tweets, columns = ['Tweets'])                 # edited
 
 # Pre-process Tweets
 def clean_tweets(data):
-    # This function has been completed for you
-    # It pre-processes the text in the Tweets and runs in parallel
+    # Pre-processes the text in the Tweets and runs in parallel
     spark = SparkSession\
     .builder\
     .appName("PythonPi")\
@@ -51,9 +48,7 @@ def clean_tweets(data):
 
 # Pre-process text in Tweet
 def text_preprocess(tweet):
-    # This function should return a Tweet that consists of only lowercase characters,
-    # no hyperlinks or symbols, and has been stemmed or lemmatized
-    # Hint: use TextBlob and Word(tweet) and look up which functions you can call
+    # This function returns a Tweet that consists of only lowercase characters
     
     t = re.sub(r"[^a-zA-Z0-9]+",' ', tweet.text)
     
@@ -67,8 +62,7 @@ def text_preprocess(tweet):
 
 # Retrieve sentiment of Tweets
 def generate_sentiment(data):
-    # This function has been completed for you
-    # It returns the sentiment of the Tweets and runs in parallel
+    # Returns the sentiment of the Tweets and runs in parallel
     spark = SparkSession\
     .builder\
     .appName("PythonPi")\
@@ -79,7 +73,7 @@ def generate_sentiment(data):
 
 # Retrieve sentiment of Tweet
 def data_sentiment(tweet):
-    # This function should return 1, 0, or -1 depending on the value of text.sentiment.polarity
+    # This function returns 1, 0, or -1 depending on the value of text.sentiment.polarity
     text = TextBlob(tweet)
     if text.sentiment.polarity > 0.05:
         return 1                                                   # Edited
@@ -91,7 +85,7 @@ def data_sentiment(tweet):
 # Classify Tweets
 def classify_tweets(data):
     # Given the cleaned Tweets and their sentiment,
-    # this function should return a list of good, neutral, and bad Tweets
+    # this function returns a list of good, neutral, and bad Tweets
     good_tweets = ""
     neutral_tweets = ""
     bad_tweets = ""
@@ -109,8 +103,7 @@ def classify_tweets(data):
 # Create word cloud
 def create_word_cloud(classified_tweets) :
     # Given the list of good, neutral, and bad Tweets,
-    # create a word cloud for each list
-    # Use different colors for each word cloud
+    # creates a word cloud for each list
     good_tweets = classified_tweets[0]
     neutral_tweets = classified_tweets[1]
     bad_tweets = classified_tweets[2]
@@ -124,7 +117,6 @@ def create_word_cloud(classified_tweets) :
 
 # Produce plot
 def produce_plot(cloud, name):
-    # This function has been completed for you
     matplotlib.pyplot.axis("off")
     matplotlib.pyplot.imshow(cloud, interpolation='bilinear')
     fig = matplotlib.pyplot.figure(1)
